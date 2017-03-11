@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="Keywords" content="西邮，西安邮电大学创新创业网络学院">
+  <meta name="Description" content="西安邮电大学创新创业网络学院，一个具有前沿性、开放性、实践性与综合性特色的大学生创新创业网络教育平台。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wrap</title>
+  <script src="http://static.runoob.com/assets/jquery/2.0.3/jquery.min.js"></script>
+  <style type="text/css">
+	#wrap {
+		background: #FFF;
+		overflow:hidden;
+		border: 1px dashed #CCC;
+		width: 100%
+	}
+	#wrap img {
+		width:300px;
+		height:220px;
+		border: 2px solid #F2F2F2;
+	}
+	#indemo {
+		float: left;
+		width: 800%;
+	}
+	#showImages {
+	float: left;
+	}
+	#copyImages1 {
+	float: left;
+	}
+	#copyImages2 {
+	float: left;
+	}
+	#tooltip{
+		position:absolute;
+		border:1px solid #ccc;
+		background:#333;
+		padding:2px;
+		display:none;
+		color:#fff;
+	}
+  </style>
+ </head>
+ <body>
+  <div id="wrap">
+	<div id="indemo">
+		<div id="showImages">
+			<a href="#"><img src="https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=2631c8eb24f5e0fef1188f016c6134e5/d788d43f8794a4c2ab3020d907f41bd5ad6e3935.jpg" border="0" /></a>
+			<a href="#"><img src="https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=74eb62909122720e64cee4fa4bca0a3a/4a36acaf2edda3cc01c57fd208e93901213f921b.jpg" border="0" /></a>
+			<a href="#"><img src="https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=d53546874aa98226a7c12d27ba80b97a/54fbb2fb43166d2271bbd1664f2309f79152d270.jpg" border="0" /></a>
+			<a href="#"><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=453427094,1590061395&fm=23&gp=0.jpg" border="0" /></a>
+			<a href="#"><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2689848393,3637900207&fm=23&gp=0.jpg" border="0" /></a>
+			<a href="#"><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1461424768,1038136994&fm=23&gp=0.jpg" border="0" /></a>
+		</div>
+		<div id="copyImages1" class="copyImage"></div>
+		<div id="copyImages2" class="copyImage"></div>
+	</div>
+  </div>
+
+  <script type="text/javascript">
+	var speed=10;
+	var tab=document.getElementById("wrap");
+	var tab1=document.getElementById("showImages");
+	var tab2=document.getElementById("copyImages1");
+	var tab3=document.getElementById("copyImages2");
+	tab2.innerHTML=tab1.innerHTML;
+	tab3.innerHTML=tab1.innerHTML;
+	var windowWidth = $(window).width();
+	function Marquee(){
+	if(tab2.offsetWidth-tab.scrollLeft<=0)
+		tab.scrollLeft-=tab1.offsetWidth
+		else{
+			tab.scrollLeft ++;
+		}
+	}
+	var MyMar=setInterval(Marquee,speed);
+	tab.onmouseover=function() {clearInterval(MyMar)};
+	tab.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
+	</script>
+	<script>
+		$(function(){
+			var x = 10;
+			var y = 20;
+			$("img").mouseover(function(e){
+				this.myTitle = this.title;
+				this.title = "";
+				var imgTitle = this.myTitle ? "<br/>" + this.myTitle : "";
+				var tooltip = "<div id='tooltip'><img src='"+ $("img").attr("src") +"' width='500px' height='300px' alt='产品预览图'/>"+imgTitle+"<\/div>"; //创建 div 元素
+				$("body").append(tooltip);	//把它追加到文档中
+				$("#tooltip")
+					.css({
+						"top": (e.pageY+y) + "px",
+						"left":  (e.pageX+x)  + "px"
+					}).show("fast");	  //设置x坐标和y坐标，并且显示
+			}).mouseout(function(){
+				this.title = this.myTitle;
+				$("#tooltip").remove();	 //移除
+			}).mousemove(function(e){
+				$("#tooltip")
+					.css({
+						"top": (e.pageY+y) + "px",
+						"left":  (e.pageX+x)  + "px"
+					});
+			});
+		})
+	</script>
+ </body>
+</html>
